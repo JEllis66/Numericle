@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState, useCallback} from 'react';
 import {create, all} from 'mathjs';
 import axios from 'axios';
@@ -15,14 +16,13 @@ const EquationGeneration = (props) =>{
 
     let postEq = "";
     let postSol = "";
-    let postDate = ""
+    let postDate = "";
     let resultIndexes = "";
 
     let possibleCharIndexes = ""
     let possibleOpIndexes = ""
     let revealTheseChars = [];
     let revealTheseOps = [];
-    let daysDB = 0;
 
     function createEq(){
 
@@ -38,7 +38,7 @@ const EquationGeneration = (props) =>{
 
         for(let i = 0; i < equationLength; i++){
             //first and last indexes must be numbers
-            if(i === 0 || i === (equationLength-1)){
+            if(i === 0 || i === equationLength){
                 initialEq += possibleEdgeNums[Math.floor(Math.random()*possibleEdgeNums.length)];
             } 
             //must then insert a number if last char was operator
@@ -69,14 +69,13 @@ const EquationGeneration = (props) =>{
                 }
             }
         }
-        console.log(initialEq)
         return initialEq;
     }
 
     // var date = new Date();
     // date.setDate(date.getDate() + 1)
 
-    function equationEvaluator(){
+    function equationEvaluator(num){
         let testEq = createEq();
         let dailySolution = math.evaluate(testEq);
 
@@ -94,23 +93,17 @@ const EquationGeneration = (props) =>{
             postEq = testEq;
             postSol = dailySolution;
             var date = new Date();
-            date.setDate(date.getDate() + daysDB);
-            console.log(date)
+            date.setDate(date.getDate() + num);
             postDate = date.toString().substring(4,15).replace(/\s+/g, '');
         }
     }
 
     function reveal(){
 
-        // isTriggerd = true;
-
-        equationEvaluator()
+        equationEvaluator(1)
     
-        possibleCharIndexes = ""
-        possibleOpIndexes = ""
-        resultIndexes = "";
-        revealTheseChars = [];
-        revealTheseOps = [];
+        let possibleCharIndexes = ""
+        let possibleOpIndexes = ""
     
         for(let i = 0; i<postEq.length; i++){
             if("^*/+-".includes(postEq[i])){
@@ -119,6 +112,9 @@ const EquationGeneration = (props) =>{
                 possibleCharIndexes += i;
             }
         }
+    
+        let revealTheseChars = [];
+        let revealTheseOps = [];
         
         for(let x = 0; x < numOfOpsToReveal; x++){
             let randIndex = Math.floor(Math.random()*possibleOpIndexes.length); //rand index
@@ -144,66 +140,59 @@ const EquationGeneration = (props) =>{
             }
         }
     
-        for(let j = 0; j < revealTheseChars.length; j++){
-            resultIndexes += revealTheseChars[j]
-        }
-        for(let k = 0; k < revealTheseOps.length; k++){
-            resultIndexes += revealTheseOps[k]
-        }
-
-        return
+        let result = ""
+            for(let j = 0; j < revealTheseChars.length; j++){
+                result += revealTheseChars[j]
+            }
+            for(let k = 0; k < revealTheseOps.length; k++){
+                result += revealTheseOps[k]
+            }
             
         }
 
     function trigger() {
-            reveal();
+            reveal(1);
 
             console.log("eq: " + postEq + ", sol: " + postSol + ", revealInd: " + resultIndexes + ", date: " + postDate)
-
-            console.log(postEq,postSol,resultIndexes,postDate)
-
-            axios.post(`http://localhost:8000/api/numericle`,
-            {
-                equation: postEq,
-                solution: postSol,
-                date: postDate,
-                revealindexes: resultIndexes
-            })
-            .then((res)=>{
-                console.log(res);
-                console.log(res.data);
-            })
-            .catch((err)=>{
-                console.log("genEq error",err)
-            })
+            // axios.post(`http://localhost:8000/api/numericle`,{
+            //     equation: postEq,
+            //     solution: postSol,
+            //     date: postDate,
+            //     revealindexes: resultIndexes
+            // })
+            // .then((res)=>{
+            //     console.log(res);
+            //     console.log(res.data);
+            //     resultIndexes = ""
+            // })
+            // .catch((err)=>{
+            //     console.log("genEq error",err)
+            // })
         
     }
-
-    let isTriggerd = true;
-
-    const startTrigger = () =>{
-        setTimeout(function() {
-            if(!isTriggerd){
-                
-                trigger(daysDB);
-                daysDB++
-                    
-
-            }
-        }, 1000)
-    }
+        
+        
     
 
-    const timer = 15000000;
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-        startTrigger();
+    // const timer = 5000;
 
-    }, timer);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //     dailyEquationGeneration();
+    // }, timer);
 
-    return () => clearInterval(interval); 
-    }, [solutionFin]) 
+    // return () => clearInterval(interval); 
+    // }, [solutionFin])
+
+    let isTriggered = false
+
+    useEffect(()=>{
+        if(!isTriggered){
+            trigger()
+        }
+        
+    })
 
     return (
         <div className="container mt-5 mb-5">
@@ -213,6 +202,10 @@ const EquationGeneration = (props) =>{
                 <p className="solutionGridAns bg-success text-white" id={`todayAnsSpot1`}>{solutionFin[0]}</p>
                 <p className="solutionGridAns bg-success text-white" id={`todayAnsSpot2`}>{solutionFin[1]}</p>
                 <p className="solutionGridAns bg-success text-white" id={`todayAnsSpot3`}>{solutionFin[2]}</p>
+            </div>
+            <div>
+                <p className="text-danger">Equation: {eq}</p>
+                <p className="text-danger">Solution: {solutionFin}</p>
             </div>
         </div>
         

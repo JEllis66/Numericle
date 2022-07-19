@@ -9,8 +9,7 @@ const Homepage = (props) => {
     return (
         <div>
             <Navigation/>
-            <hr class="mt-0"/>
-            {/* <AllProducts product = {product} setProduct = {setProduct}/> */}
+            <hr className="mt-0"/>
             <Main/>
         </div>
     )

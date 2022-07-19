@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "../components/Navigation";
-import DiscussionContent from "../components/DiscussionContent";
+import DiscussionContent from "../components/Discussion/DiscussionContent";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 

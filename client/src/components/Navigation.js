@@ -5,6 +5,8 @@ import Menu from "./Menu.js";
 import Stats from "./Stats.js";
 import Help from "./Help.js";
 import Settings from "./Settings.js";
+import UserLogin from "./User/UserLogin.js";
+import NewUser from "./User/NewUser.js";
 
 import menu1 from "../images/menu_light.png";
 import menu2 from "../images/menu_hover.png";
@@ -18,71 +20,138 @@ import logo from "../images/logo.png";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navigation = () =>{
+
     const [menuPopup, setMenuPopup] = useState(false);
     const [statsPopup, setStatsPopup] = useState(false);
     const [helpPopup, setHelpPopup] = useState(false);
     const [settingsPopup, setSettingsPopup] = useState(false);
-
+    const [userLoginPopup, setUserLoginPopup] = useState(false);
+    const [newLoginPopup, setNewLoginPopup] = useState(false);
 
     return (
 
-        <div id="nav" class="container d-flex justify-content-between align-middle mt-3">
-            <div class="row col-0">
+        <div id="nav" className="container d-flex justify-content-between align-middle mt-3">
+            <div className="row col-0">
                 <Menu trigger={menuPopup} setTrigger={setMenuPopup}>
-                    <div class="d-flex justify-content-between">
-                        <h2 class="text-secondary"> Menu:</h2>
-                        <button className="closePopUp" onClick={()=> {setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setMenuPopup(!menuPopup)}}>X</button>
+                    <div className="d-flex justify-content-between">
+                        <h2 className="text-secondary"> Menu:</h2>
+                        <button className="closePopUp" onClick={()=> {setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setMenuPopup(!menuPopup)}}>X</button>
                     </div>
-                    <div class="row d-flex justify-content-start mt-3">
-                        <div><Link class="text-decoration-none" to={"/discussion"}><ul>Daily Discussion</ul></Link></div>
-                        <div><a class="text-decoration-none" href="https://github.com/JEllis66/Numericle"><ul>Numericle's GitHub Repo</ul></a></div>
-                        <div><a class="text-decoration-none" href="https://jtellis.com/"><ul>Creator's Homepage</ul></a></div>
-                    </div>    
+                    <ul className="row d-flex text-start mt-3 pb-4">
+                        <li className="mt-2 mb-2"><Link className="text-decoration-none" to={"/home"}>Home</Link></li>
+                        <li onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setNewLoginPopup(false); setUserLoginPopup(!userLoginPopup)}} className="mb-2"><a className="text-decoration-none" href="#">User Login</a></li>
+                        <li className="mb-2"><Link className="text-decoration-none" to={"/discussion"}>Daily Discussion</Link></li>
+                        <li className="mb-2"><a className="text-decoration-none" href="https://github.com/JEllis66/Numericle">Numericle's GitHub Repo</a></li>
+                        <li className="mb-2"><a className="text-decoration-none" href="https://jtellis.com/">Creator's Homepage</a></li>
+                    </ul>    
                 </Menu>
                 <Stats trigger={statsPopup} setTrigger={setStatsPopup}>
-                    <div class="d-flex justify-content-between">
-                        <h2 class="text-secondary"> Stats:</h2>
-                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setHelpPopup(false); setSettingsPopup(false); setStatsPopup(!statsPopup)}}>X</button>
+                    <div className="d-flex justify-content-between">
+                        <h2 className="text-secondary"> Stats:</h2>
+                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setHelpPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setStatsPopup(!statsPopup)}}>X</button>
                     </div>
-                    <div class="row d-flex justify-content-start mt-3">
-                        <div><Link class="text-decoration-none" to={"/discussion"}><ul>Daily Discussion</ul></Link></div>
-                        <div><a class="text-decoration-none" href="https://github.com/JEllis66/Numericle"><ul>Numericle's GitHub Repo</ul></a></div>
-                        <div><a class="text-decoration-none" href="https://jtellis.com/"><ul>Creator's Homepage</ul></a></div>
+                    <div className="row d-flex justify-content-start mt-3">
+                        <p>User stats will go here...</p>
                     </div>    
                 </Stats>
                 <Help trigger={helpPopup} setTrigger={setHelpPopup}>
-                    <div class="d-flex justify-content-between">
-                        <h2 class="text-secondary"> Help:</h2>
-                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setSettingsPopup(false); setHelpPopup(!helpPopup)}}>X</button>
+                    <div className="d-flex justify-content-between">
+                        <h2 className="text-secondary"> Help:</h2>
+                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setHelpPopup(!helpPopup)}}>X</button>
                     </div>
-                    <div class="row d-flex justify-content-start mt-3">
-                        <div><Link class="text-decoration-none" to={"/discussion"}><ul>Daily Discussion</ul></Link></div>
-                        <div><a class="text-decoration-none" href="https://github.com/JEllis66/Numericle"><ul>Numericle's GitHub Repo</ul></a></div>
-                        <div><a class="text-decoration-none" href="https://jtellis.com/"><ul>Creator's Homepage</ul></a></div>
+                    <div className="row d-flex justify-content-start mt-3">
+                        <p>Help/Tutorial Graphic will go here...</p>
                     </div>    
                 </Help>
                 <Settings trigger={settingsPopup} setTrigger={setSettingsPopup}>
-                    <div class="d-flex justify-content-between">
-                        <h2 class="text-secondary"> Settings:</h2>
-                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setSettingsPopup(!settingsPopup)}}>X</button>
+                    <div className="d-flex justify-content-between">
+                        <h2 className="text-secondary"> Settings:</h2>
+                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setSettingsPopup(!settingsPopup)}}>X</button>
                     </div>
-                    <div class="row d-flex justify-content-start mt-3">
-                        <div><Link class="text-decoration-none" to={"/discussion"}><ul>Daily Discussion</ul></Link></div>
-                        <div><a class="text-decoration-none" href="https://github.com/JEllis66/Numericle"><ul>Numericle's GitHub Repo</ul></a></div>
-                        <div><a class="text-decoration-none" href="https://jtellis.com/"><ul>Creator's Homepage</ul></a></div>
-                    </div>    
+                    <p className="mt-4" >Settings will go here with much better styling...</p>
+                    <label className="d-flex text-start mt-4 mb-2">
+                        <span>Dark Mode</span>
+                        <input type="checkbox"/>
+                    </label>
+                    <label className="d-flex text-start mt-2 mb-2">
+                        <span className="mr-3">Hard Mode</span>
+                        <input className="mr-3" type="checkbox"/>
+                    </label>    
                 </Settings>
+                <UserLogin trigger={userLoginPopup} setTrigger={setUserLoginPopup}>
+                    <div className="d-flex justify-content-between">
+                        <h2 className="text-secondary"> User Login:</h2>
+                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setNewLoginPopup(false); setUserLoginPopup(!userLoginPopup)}}>X</button>
+                    </div>
+                    <div className="row d-flex text-start mt-3">
+                        <form className="form">
+                            <div className="mb-1">
+                                <label className="form-label">
+                                    Email Address:
+                                    <input type="email" className="form-control"/>
+                                </label>
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">
+                                    Password:
+                                    <input type="password" className="form-control"/>
+                                </label>
+                            </div>
+                            <button type="submit" className="btn btn-primary mb-4">Login</button>
+                            <div className="mb-4">
+                                <a href="#" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(!newLoginPopup)}}>Create Account</a>
+                            </div>
+                        </form>
+                    </div>    
+                </UserLogin>
+                <NewUser trigger={newLoginPopup} setTrigger={setNewLoginPopup}>
+                    <div className="d-flex justify-content-between">
+                        <h2 className="text-secondary"> New Login:</h2>
+                        <button className="closePopUp" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(!newLoginPopup)}}>X</button>
+                    </div>
+                    <div className="row d-flex text-start mt-4">
+                        <form className="form">
+                            <div className="mb-1 d-flex justify-content-around">
+                                <div></div>
+                                <label className="form-label">
+                                    Email Address:
+                                    <input type="email" className="form-control"/>
+                                </label>
+                                <label className="form-label">
+                                    Username:
+                                    <input type="text" className="form-control"/>
+                                </label>
+                                <div></div>
+                            </div>
+                            <div className="mb-3 d-flex justify-content-around">
+                            <div></div>
+                                <label className="form-label">
+                                    Password:
+                                    <input type="password" className="form-control"/>
+                                </label>
+                                <label className="form-label">
+                                    Confirm Password:
+                                    <input type="password" className="form-control"/>
+                                </label>
+                                <div></div>
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <button onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setUserLoginPopup(!userLoginPopup); setNewLoginPopup(!newLoginPopup)}} type="submit" className="btn btn-primary ml-5 mb-4 mt-3 ">Create User</button>
+                            </div>
+                        </form>
+                    </div>       
+                </NewUser>
             </div>
-            <div class="col-2">
-                <img class="icons mt-3" id="icon1" src={menu1} alt="menu.png" onClick={()=> {setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setMenuPopup(!menuPopup)}} onMouseEnter={e => (e.currentTarget.src = menu2)} onMouseLeave={e => (e.currentTarget.src = menu1)}/>
-                <img class="icons mt-3" id="icon2" src={stats1} alt="stats.png" onClick={()=> {setMenuPopup(false); setHelpPopup(false); setSettingsPopup(false); setStatsPopup(!statsPopup)}} onMouseEnter={e => (e.currentTarget.src = stats2)} onMouseLeave={e => (e.currentTarget.src = stats1)}/>
+            <div className="col-2">
+                <img className="icons mt-3" id="icon1" src={menu1} alt="menu.png" onClick={()=> {setStatsPopup(false); setHelpPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setMenuPopup(!menuPopup)}} onMouseEnter={e => (e.currentTarget.src = menu2)} onMouseLeave={e => (e.currentTarget.src = menu1)}/>
+                <img className="icons mt-3" id="icon2" src={stats1} alt="stats.png" onClick={()=> {setMenuPopup(false); setHelpPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setStatsPopup(!statsPopup)}} onMouseEnter={e => (e.currentTarget.src = stats2)} onMouseLeave={e => (e.currentTarget.src = stats1)}/>
             </div>
-            <h1 class="text-primary pt-2 col-8">
-                <Link class='text-decoration-none' to={"/"}><p><span><img class="icons mb-2" id="logoTop" src={logo} alt="numericleLogo.png"/></span>umericle</p></Link>
+            <h1 className="text-primary pt-2 col-8">
+                <Link className='text-decoration-none' to={"/"}><p><span><img className="icons mb-2" id="logoTop" src={logo} alt="numericleLogo.png"/></span>umericle</p></Link>
             </h1>
-            <div class="col-2">
-                <img class="icons mt-3" id="icon3" src={help1} alt="help.png" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setSettingsPopup(false); setHelpPopup(!helpPopup)}} onMouseEnter={e => (e.currentTarget.src = help2)} onMouseLeave={e => (e.currentTarget.src = help1)}/>
-                <img class="icons mt-3" id="icon4" src={settings1} alt="settings.png" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setSettingsPopup(!settingsPopup)}} onMouseEnter={e => (e.currentTarget.src = settings2)} onMouseLeave={e => (e.currentTarget.src = settings1)}/>
+            <div className="col-2">
+                <img className="icons mt-3" id="icon3" src={help1} alt="help.png" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setSettingsPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setHelpPopup(!helpPopup)}} onMouseEnter={e => (e.currentTarget.src = help2)} onMouseLeave={e => (e.currentTarget.src = help1)}/>
+                <img className="icons mt-3" id="icon4" src={settings1} alt="settings.png" onClick={()=> {setMenuPopup(false); setStatsPopup(false); setHelpPopup(false); setUserLoginPopup(false); setNewLoginPopup(false); setSettingsPopup(!settingsPopup)}} onMouseEnter={e => (e.currentTarget.src = settings2)} onMouseLeave={e => (e.currentTarget.src = settings1)}/>
             </div>
         </div>
     )

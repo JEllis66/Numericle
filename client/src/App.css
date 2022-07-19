@@ -80,7 +80,7 @@
 }
 
 .key_enterDelete{
-  width: 150px;
+  width: 138px;
   height: 60px;
   padding-top: 17px;
   color: white;
@@ -103,7 +103,7 @@
   border-radius: 1em;
 }
 
-.guessGrid,.guessGridAns, .equals, .solutionGridAns{
+.guessGrid,.guessGridAns, .equals, .solutionGridAns, .correctDig, .nearDig, .wrongDig{
   width: 60px;
   height: 60px;
   margin-right: 6px;
@@ -112,10 +112,9 @@
   padding-top: 7px;
 }
 
-.guessGrid,.guessGridAns,.solutionGridAns{
+.guessGrid,.guessGridAns,.solutionGridAns, .correctDig, .nearDig, .wrongDig{
   border: lightgray 2px solid;
 }
-
 
 .closePopUp{
   width: 30px;
@@ -126,10 +125,27 @@
   color: white;
 }
 
-ul{
-  font-size: 14pt;
+li,ul{
+  font-size: 16pt;
+  list-style-type: none;
 }
+
 
 #keyboardBar{
   all: unset !important;
 }
+
+.correctDig{
+  background-color: #198754;
+  color: white;
+} 
+
+.nearDig{
+  background-color: #ffc107;
+} 
+
+.wrongDig {
+  background-color: #dc3545;
+  color: white;
+}
+
