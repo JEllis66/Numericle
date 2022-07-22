@@ -207,8 +207,8 @@ const EquationGeneration = (props) =>{
 
     return (
         <div className="container mt-5 mb-5">
-            <div className="d-flex justify-content-center mb-5">
-                <h2 className='text-success pt-2'> Today's Solution</h2>
+            <div className="d-flex justify-content-center align-middle mb-5">
+                <h2 id="todaysSolution" className='text-success pt-2'> Today's Solution</h2>
                 <p className="equals">=</p>
                 <p className="solutionGridAns bg-success text-white" id={`todayAnsSpot1`}>{solutionFin[0]}</p>
                 <p className="solutionGridAns bg-success text-white" id={`todayAnsSpot2`}>{solutionFin[1]}</p>

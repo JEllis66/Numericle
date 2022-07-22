@@ -23,7 +23,7 @@
 }
 
 .icons {
-  height: 30px;
+  height: 36px;
 }
 
 .icons:hover {
@@ -43,26 +43,29 @@
 }
 
 .key_unselected, .key_selected{
-  width: 60px;
-  height: 60px;
+  /* width: 60px; */
+  border: white 2px solid;
+  height: 70px; 
   background-color: rgb(224, 224, 224);
-  margin-right: 10px;
   text-align: center;
   padding-top: 18px;
   border-radius: 1em;
+  font-size: 20px;
 }
 
 .key_unselected:hover, .key_selected:hover{
   background-color: rgb(194, 194, 194);
   cursor: pointer;
-  box-shadow: #282c34 1px 1px 1px;
+  /* box-shadow: #282c34 1px 1px 1px; */
 }
 
 .key_pressed{
-  width: 60px;
-  height: 60px;
+  /* width: 60px; */
+  height: 70px;
   background-color: rgb(164, 164, 164);
+  border: white 2px solid;
   margin-right: 10px;
+  font-size: 20px;
   text-align: center;
   padding-top: 18px;
   border-radius: 1em;
@@ -79,10 +82,16 @@
   color: #2B01FD;
 }
 
+#todaysSolution{
+  font-size: 24pt;
+}
+
 .key_enterDelete{
-  width: 138px;
-  height: 60px;
+  /* width: 138px; */
+  font-size: 22px;
+  height: 70px; 
   padding-top: 17px;
+  border: white 2px solid;
   color: white;
   background-color: rgb(86, 86, 86);
   border-radius: 1em;
@@ -91,20 +100,12 @@
 .key_enterDelete:hover{
   background-color: rgb(32,32,32);
   cursor: pointer;
-  box-shadow: rgb(193, 193, 193) 2px 2px 2px;
-}
-
-#key_delete{
-  width: 60px;
-  height: 60px;
-  margin-right: 10px;
-  text-align: center;
-  padding-top: 17px;
-  border-radius: 1em;
+  /* box-shadow: rgb(193, 193, 193) 2px 2px 2px; */
 }
 
 .guessGrid,.guessGridAns, .equals, .solutionGridAns, .correctDig, .nearDig, .wrongDig{
-  width: 60px;
+  width: 6vw;
+  min-width: 5vw;
   height: 60px;
   margin-right: 6px;
   text-align: center;
